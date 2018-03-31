@@ -1,5 +1,6 @@
 package com.example.okc.auth.rest;
 
+import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,12 +51,12 @@ public class UserController {
 		}
 
 		userService.save(userForm);
-		securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
+		securityService.autologin(userForm.getUsername(), userForm.getPassword());
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	@GetMapping(value = { "/" })
-	public String welcome(Model model) {
-		return "/index.html";
+	@GetMapping("/mod")
+	public String getMessageOfTheDay(Principal principal) {
+		return "The message of the day is boring for user: " + principal.getName();
 	}
 }

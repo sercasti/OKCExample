@@ -22,6 +22,7 @@ public class User {
 	@Size(min = 6, max = 128, message = "Size.userForm.password")
 	private String password;
 	@Transient
+	@NotNull(message = "NotEmpty")
 	private String passwordConfirm;
 
 	@PersistenceConstructor
